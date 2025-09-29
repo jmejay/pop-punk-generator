@@ -40,4 +40,8 @@ def create_app(test_config=None):
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
 
+    from . import album
+    app.register_blueprint(album.bp)
+    app.add_url_rule('/album', endpoint='album')
+
     return app

@@ -1,26 +1,194 @@
-html { font-family: sans-serif; background: #eee; padding: 1rem; }
-body { max-width: 960px; margin: 0 auto; background: white; }
-h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
-a { color: #377ba8; }
-hr { border: none; border-top: 1px solid lightgray; }
-nav { background: lightgray; display: flex; align-items: center; padding: 0 0.5rem; }
-nav h1 { flex: auto; margin: 0; }
-nav h1 a { text-decoration: none; padding: 0.25rem 0.5rem; }
-nav ul  { display: flex; list-style: none; margin: 0; padding: 0; }
-nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
-.content { padding: 0 1rem 1rem; }
-.content > header { border-bottom: 1px solid lightgray; display: flex; align-items: flex-end; }
-.content > header h1 { flex: auto; margin: 1rem 0 0.25rem 0; }
-.flash { margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
-.post > header { display: flex; align-items: flex-end; font-size: 0.85em; }
-.post > header > div:first-of-type { flex: auto; }
-.post > header h1 { font-size: 1.5em; margin-bottom: 0; }
-.post .about { color: slategray; font-style: italic; }
-.post .body { white-space: pre-line; }
-.content:last-child { margin-bottom: 0; }
-.content form { margin: 1em 0; display: flex; flex-direction: column; }
-.content label { font-weight: bold; margin-bottom: 0.5em; }
-.content input, .content textarea { margin-bottom: 1em; }
-.content textarea { min-height: 12em; resize: vertical; }
-input.danger { color: #cc2f2e; }
-input[type=submit] { align-self: start; min-width: 10em; }
+html { 
+  font-family: 'Arial', 'Helvetica Neue', sans-serif; 
+  background: #000000; 
+  padding: 1rem; 
+  background-image: radial-gradient(#ff00ff 1px, transparent 1px), 
+                    radial-gradient(#00ffff 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+}
+body { 
+  max-width: 960px; 
+  margin: 0 auto; 
+  background: #000000; 
+  border: 3px solid #ff00ff;
+  border-radius: 0;
+  box-shadow: 8px 8px 0px #00ffff;
+}
+h1 { 
+  font-family: 'Impact', 'Arial Black', sans-serif; 
+  color: #ffffff; 
+  margin: 1rem 0; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 0px #ff00ff;
+}
+h2 { 
+  font-family: 'Impact', 'Arial Black', sans-serif; 
+  color: #ffffff; 
+  margin: 1rem 0; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 0px #00c8ff;
+}
+a { 
+  color: #ffff00; 
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover {
+  color: #ff00ff;
+  text-decoration: underline;
+}
+hr { 
+  border: none; 
+  border-top: 2px dashed #ffff00; 
+}
+nav { 
+  background: linear-gradient(45deg, #ff00ff, #00ffff);
+  display: flex; 
+  align-items: center; 
+  padding: 0 0.5rem; 
+  border-bottom: 3px solid #ffff00;
+}
+nav h1 { 
+  flex: auto; 
+  margin: 0; 
+}
+nav h1 a { 
+  text-decoration: none; 
+  padding: 0.25rem 0.5rem; 
+  color: #000000;
+  font-weight: 900;
+}
+nav ul  { 
+  display: flex; 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+}
+nav ul li a, nav ul li span, header .action { 
+  display: block; 
+  padding: 0.5rem; 
+  background: #000000;
+  color: #ffff00;
+  margin: 0 2px;
+  border: 2px solid #ffff00;
+}
+nav ul li a:hover {
+  background: #ffff00;
+  color: #000000;
+}
+.content { 
+  padding: 0 1rem 1rem; 
+  background: #000000;
+  color: #ffffff;
+}
+.content > header { 
+  border-bottom: 2px solid #ff00ff; 
+  display: flex; 
+  align-items: flex-end; 
+}
+.content > header h1 { 
+  flex: auto; 
+  margin: 1rem 0 0.25rem 0; 
+}
+.flash { 
+  margin: 1em 0; 
+  padding: 1em; 
+  background: #ffff00; 
+  border: 2px solid #ff00ff; 
+  color: #000000;
+  font-weight: bold;
+}
+.post > header { 
+  display: flex; 
+  align-items: flex-end; 
+  font-size: 0.85em; 
+  background: #111111;
+  padding: 10px;
+  border-left: 4px solid #ff00ff;
+}
+.post > header > div:first-of-type { 
+  flex: auto; 
+}
+.post > header h1 { 
+  font-size: 1.5em; 
+  margin-bottom: 0; 
+  text-shadow: 2px 2px 0px #00ffff;
+}
+.post .about { 
+  color: #00ffff; 
+  font-style: italic; 
+  font-weight: bold;
+}
+.post .body { 
+  white-space: pre-line; 
+  background: #111111;
+  padding: 15px;
+  border: 1px solid #333333;
+}
+.content:last-child { 
+  margin-bottom: 0; 
+}
+.content form { 
+  margin: 1em 0; 
+  display: flex; 
+  flex-direction: column; 
+}
+.content label { 
+  font-weight: bold; 
+  margin-bottom: 0.5em; 
+  color: #ff00ff;
+}
+.content input, .content textarea { 
+  margin-bottom: 1em; 
+  background: #000000;
+  border: 2px solid #ffff00;
+  color: #ffffff;
+  padding: 8px;
+}
+.content textarea { 
+  min-height: 12em; 
+  resize: vertical; 
+}
+input.danger { 
+  color: #ff0000; 
+  background: #000000;
+  border: 2px solid #ff0000;
+}
+input[type=submit] { 
+  align-self: start; 
+  min-width: 10em; 
+  background: #ff00ff;
+  color: #000000;
+  border: 2px solid #ffff00;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background: #ffff00;
+  color: #000000;
+}
+
+/* Additional pop punk elements */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.album-card {
+  background: #111111;
+  border: 3px solid #ff00ff;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.album-card:hover {
+  transform: rotate(-2deg) scale(1.05);
+  border-color: #00ffff;
+  box-shadow: 5px 5px 0px #ffff00;
+}

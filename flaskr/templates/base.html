@@ -1,11 +1,12 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
+<title>{% block title %}{% endblock %} - Jim's cool website</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>Flaskr</h1>
+  <h1>Jimball's Pop Punk album generator</h1>
   <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
+      {% if g.user %}
+      <li><span>{{ g.user['username'] }}     </span>
+      <li><a href="{{ url_for('album.index') }}">Get Album</a>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}
       <li><a href="{{ url_for('auth.register') }}">Register</a>

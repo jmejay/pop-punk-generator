@@ -4,6 +4,8 @@ from datetime import datetime
 import click
 from flask import current_app, g
 
+import csv
+
 
 def get_db():
     if 'db' not in g:
@@ -23,12 +25,46 @@ def close_db(e=None):
         db.close()
 
 
-def init_db():
+def init_db(): # this is run via flask --app flaskr init-db in terminal
     db = get_db()
 
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
+
+
+    with open('flaskr/data.csv') as data:
+        datareader = csv.DictReader(data)
+        for row in datareader:
+            db.execute('INSERT INTO albums (album_name, album_id, release_date,total_tracks, spotify_album_link, spotify_album_image_url, band_name, band_id, band_popularity, band_spotify_url) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                        (row['name'],
+                        row['id'],
+                        row['release_date'],
+                        row['total_tracks'],
+                        row['link'],
+                        row['img'],
+                        row['band_spotify_name'],
+                        row['band_spotify_id'],
+                        row['band_spotify_popularity'],
+                        row['band_spotify_link'])
+            )
+        db.commit()
+                           
+
+# name,id,release_date,total_tracks,link,img,band_spotify_id,band_spotify_name,band_spotify_popularity,band_spotify_link
+                    
+
+# id INTEGER PRIMARY KEY AUTOINCREMENT,
+# album_name TEXT NOT NULL,
+# album_id TEXT NOT NULL,
+# release_date TIMESTAMP,
+# total_tracks INTEGER,
+# spotify_album_link TEXT,
+# spotify_album_image_url TEXT,
+# band_name TEXT,
+# band_id TEXT,
+# band_popularity INTEGER,
+# band_spotify_url TEXT
 
 @click.command('init-db')
 def init_db_command():

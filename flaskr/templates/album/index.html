@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  {% for album in albums %}
+  <center>
+    <article class="album">
+      <header>
+        <div>
+          <h1><img width="16" alt="Spotify icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/32px-Spotify_icon.svg.png?20220821125323"> <a href={{ album['spotify_album_link'] }} target="_blank">{{ album['album_name'] }}</h1></div></a>
+          <div class="about"><h2>{{ album['band_name'] }}</h2> </div>
+          <br />
+          <div class="about">released {{ album['release_date'].strftime('%Y-%m-%d') }}</div>
+          <br />
+        </div>
+      </header>
+      <img src={{ album['spotify_album_image_url'] }}></img>
+    </article>
+</center>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
