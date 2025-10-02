@@ -21,7 +21,7 @@ h1 {
   margin: 1rem 0; 
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 3px 3px 0px #ff00ff;
+  text-shadow: 2px 2px 0px #ff00ff;
 }
 h2 { 
   font-family: 'Impact', 'Arial Black', sans-serif; 
@@ -29,7 +29,7 @@ h2 {
   margin: 1rem 0; 
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 3px 3px 0px #00c8ff;
+  text-shadow: 2px 2px 0px #00c8ff;
 }
 a { 
   color: #ffff00; 
@@ -218,8 +218,8 @@ html {
   font-family: 'Arial', 'Helvetica Neue', sans-serif; 
   background: #000000; 
   padding: 1rem; 
-  background-image: radial-gradient(#ff00ff 1px, transparent 1px), 
-                    radial-gradient(#00ffff 1px, transparent 1px);
+  background-image: radial-gradient(#ff00ff 2px, transparent 2px), 
+                    radial-gradient(#00ffff 2px, transparent 2px);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
   background-attachment: fixed;

@@ -41,13 +41,13 @@ CREATE TABLE IF NOT EXISTS generations (
   FOREIGN KEY (album_id) REFERENCES album (id)
 );
 
-CREATE TABLE IF NOT EXISTS rankings (
+CREATE TABLE IF NOT EXISTS ratings (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER,
   album_id INTEGER,
   generation_id INTEGER,
-  ranked_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  ranking INTEGER,
+  rated_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  rating INTEGER,
   FOREIGN KEY (user_id) REFERENCES user (id),
   FOREIGN KEY (album_id) REFERENCES album (id),
   FOREIGN KEY (generation_id) REFERENCES generations (id)

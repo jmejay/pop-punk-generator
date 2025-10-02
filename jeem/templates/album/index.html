@@ -2,24 +2,140 @@
 
 
 {% block content %}
-  {% for album in albums %}
-  <center>
-    <article class="album">
-      <header>
-        <div>
-          <h1><img width="16" alt="Spotify icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/32px-Spotify_icon.svg.png?20220821125323"> <a href={{ album['spotify_album_link'] }} target="_blank">{{ album['album_name'] }}</h1></div></a>
-          <div class="about"><h2>{{ album['band_name'] }}</h2> </div>
-          <br />
-          <div class="about">released {{ album['release_date'].strftime('%Y-%m-%d') }}</div>
-          <br />
-        </div>
-      </header>
-      <img src={{ album['spotify_album_image_url'] }}></img>
-    </article>
-</center>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
-{% endblock %}
 
+
+
+
+
+<form method="POST" id="rating-form">
+    <input type="hidden" name="rating" id="rating-input">
+</form>
+<center>
+  <article class="album">
+    <header>
+      <div>
+        <h1 style="font-size: 2.5rem;"><img width="25" alt="Spotify icon"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/32px-Spotify_icon.svg.png?20220821125323">
+          <a href={{ album['spotify_album_link'] }} target="_blank">{{ album['album_name'] }}</h1>
+      </div></a>
+      <div class="about">
+        <h2>{{ album['band_name'] }}</h2>
+      </div>
+      <div class="about"><small>
+          <h2>released {{ album['release_date'].strftime('%Y-%m-%d') }}</h2>
+        </small></div>
+
+
+
+      </div>
+    </header>
+    <img src={{ album['spotify_album_image_url'] }}></img>
+    <h2>Ratings:&nbsp;{{rating_data['cnt']}}&nbsp;Average:{{rating_data['avg']}}</h2>
+  </article>
+  
+  
+  <h1>Rate this album:</h1>
+  <div class="stars">
+    <span class="star" data-rating="1">&nbsp;</span>
+    <span class="star" data-rating="2">&nbsp;</span>
+    <span class="star" data-rating="3">&nbsp;</span>
+    <span class="star" data-rating="4">&nbsp;</span>
+    <span class="star" data-rating="5">&nbsp;</span>
+  </div>
+  <style>
+    .stars {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Default state - hollow stars */
+    .star::before {
+      content: "☆";
+    }
+
+    /* Hover state - filled star */
+    .star:hover::before,
+    .star.hovered::before {
+      content: "⭐";
+    }
+
+    .star:hover {
+      transform: scale(1);
+    }
+
+    /* Default state - hollow stars 
+        .star {
+            filter: grayscale(100%);
+            opacity: 0.3;
+        }
+        /* Hover state - filled stars 
+        .star:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.2);
+        }*/
+  </style>
+
+
+
+  <script>
+    const stars = document.querySelectorAll('.star');
+
+    stars.forEach(star => {
+      star.addEventListener('mouseover', function () {
+        const rating = parseInt(this.getAttribute('data-rating'));
+        highlightStars(rating);
+      });
+
+      star.addEventListener('mouseout', function () {
+        removeHighlight();
+      });
+    });
+
+    function highlightStars(rating) {
+      stars.forEach(star => {
+        const starRating = parseInt(star.getAttribute('data-rating'));
+        if (starRating <= rating) {
+          star.classList.add('hovered');
+        } else {
+          star.classList.remove('hovered');
+        }
+      });
+    }
+
+    function removeHighlight() {
+      stars.forEach(star => {
+        star.classList.remove('hovered');
+      });
+    }
+
+
+    function setRating(rating) {
+    // Set the hidden input value
+    document.getElementById('rating-input').value = rating;
+    // Submit the form
+    document.getElementById('rating-form').submit();
+}
+
+// Add click events to stars
+document.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('click', function() {
+        const rating = this.getAttribute('data-rating');
+        setRating(rating);
+    });
+});
+        
+  </script>
+
+  </br>
+
+  
+
+  {% for rating in ratings %}
+
+  <p class="rating">Rated {{'🤟'*rating['rating']}}<small> <i>by {{rating['username']}} on
+        {{rating['rated_on'].strftime('%Y-%m-%d %-I.%M%p')}}</small></i></p>
+
+  {% endfor %}
+</center>
+{% endblock %}

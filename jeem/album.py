@@ -6,13 +6,68 @@ from werkzeug.exceptions import abort
 from jeem.auth import login_required
 from jeem.db import get_db
 
+import random
+
 bp = Blueprint('album', __name__)
 
 @bp.route('/album')
-def index():
+@bp.route('/album/<int:album_id>', methods=('GET', 'POST'))
+
+@login_required
+def index(album_id=None):
+
     db = get_db()
-    albums = db.execute(
-        'SELECT *'
-        'FROM albums ORDER BY RANDOM() limit 1;'
+
+    # If no album_id provided, redirect to a random album
+    if album_id is None:
+        album_count = db.execute('SELECT COUNT(*) AS count FROM albums').fetchone()
+        random_album_id = random.randint(1, album_count['count'])
+        return redirect(url_for('album.index', album_id=random_album_id))
+    
+    album = db.execute('SELECT * FROM albums WHERE id = ? LIMIT 1;', (album_id,)).fetchone()
+
+    
+    if album is None:
+        abort(404, f"Album id {album_id} doesn't exist.")
+    
+
+    if request.method == 'POST':
+        rating = request.form['rating']
+        error = None
+
+
+        if error is not None:
+            flash(error)
+        else: 
+            db.execute(
+                'INSERT INTO ratings (user_id, album_id, rating)'
+                'VALUES (?, ?, ?)',
+                (1, album_id, rating)
+            )
+            db.commit()
+
+    # album_count = db.execute(
+    #     'SELECT COUNT(*) AS "id"'
+    #     'FROM albums;'
+    # ).fetchone()
+
+    # random_album = random.randint(1,album_count['id'])
+    # print(random_album)
+    # print(album_count)
+
+
+    ratings = db.execute('SELECT * '
+        ' FROM ratings r '
+        ' LEFT JOIN user u ON r.user_id = u.id '
+        ' WHERE album_id = ? ORDER BY rated_on desc limit 10;', (album_id,)
     ).fetchall()
-    return render_template('album/index.html', albums=albums)
+
+    rating_data = db.execute('SELECT COUNT(*) AS cnt, ROUND(AVG(rating),2) AS avg ' 
+        ' FROM ratings r ' 
+        ' WHERE album_id = ?;', (album_id,)
+    ).fetchone()
+
+    return render_template('album/index.html', album=album, ratings=ratings, rating_data=rating_data)
+
+
+    
