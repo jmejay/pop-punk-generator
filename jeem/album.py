@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
 from werkzeug.exceptions import abort
 
@@ -42,7 +42,7 @@ def index(album_id=None):
             db.execute(
                 'INSERT INTO ratings (user_id, album_id, rating)'
                 'VALUES (?, ?, ?)',
-                (1, album_id, rating)
+                (session['user_id'], album_id, rating)
             )
             db.commit()
 

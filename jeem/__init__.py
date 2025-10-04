@@ -45,3 +45,10 @@ def create_app(test_config=None):
     app.add_url_rule('/album', endpoint='album')
 
     return app
+
+# Create the app instance
+app = create_app()
+
+# This ensures that when imported, it returns 'jeem:app'
+if __name__ == '__main__':
+    app.run()

@@ -24,6 +24,14 @@
       <div class="about"><small>
           <h2>released {{ album['release_date'].strftime('%Y-%m-%d') }}</h2>
         </small></div>
+        {% if album['band_genre'] %}
+      <div class="about"><small>
+          <h2>Genre: {{ album['band_genre']}}</h2>
+        </small></div>
+        {% endif %}
+      <div class="about"><small>
+          <h2>Popularity: {{ album['band_popularity']}}%</h2>
+        </small></div>
 
 
 
