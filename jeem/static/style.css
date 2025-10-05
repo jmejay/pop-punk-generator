@@ -1,123 +1,98 @@
 html { 
   font-family: 'Arial', 'Helvetica Neue', sans-serif; 
   background: #000000; 
-  padding: 0;
-  margin: 0;
-  background-image: radial-gradient(#ff00ff 2px, transparent 2px), 
-                    radial-gradient(#00ffff 2px, transparent 2px);
+  padding: 1rem; 
+  background-image: radial-gradient(#ff00ff 1px, transparent 1px), 
+                    radial-gradient(#00ffff 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
-  background-attachment: fixed;
 }
-
 body { 
-  max-width: 100%;
+  max-width: 960px; 
   margin: 0 auto; 
   background: #000000; 
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  position: relative; /* Added for nav positioning context */
-}
-
-/* New container for main content */
-.main-container {
-  max-width: 960px;
-  margin: 0 auto;
-  background: #000000;
   border: 3px solid #ff00ff;
   border-radius: 0;
   box-shadow: 8px 8px 0px #00ffff;
-  margin-top: 1rem;
-  padding-top: 60px; /* Added space for the nav */
 }
-
-/* Navigation as compact vertical element in top right */
+h1 { 
+  font-family: 'Impact', 'Arial Black', sans-serif; 
+  color: #ffffff; 
+  margin: 1rem 0; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px #ff00ff;
+}
+h2 { 
+  font-family: 'Impact', 'Arial Black', sans-serif; 
+  color: #ffffff; 
+  margin: 1rem 0; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px #00c8ff;
+}
+a { 
+  color: #ffff00; 
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover {
+  color: #00b7ff;
+  text-decoration: underline;
+}
+hr { 
+  border: none; 
+  border-top: 2px dashed #ffff00; 
+}
 nav { 
   background: linear-gradient(45deg, #ff00ff, #00ffff);
   display: flex; 
-  flex-direction: column; /* Stack items vertically */
-  align-items: flex-end; /* Align to the right */
-  padding: 0.5rem;
-  border: 3px solid #ffff00;
-  border-top: none;
-  border-right: none;
-  width: auto;
-  position: absolute; /* Position absolutely in top right */
-  top: 0;
-  right: 0;
-  z-index: 1000;
-  min-width: 150px; /* Compact width */
+  align-items: center; 
+  padding: 0 0.5rem; 
+  border-bottom: 3px solid #ffff00;
 }
-
 nav h1 { 
-  margin: 0 0 0.5rem 0; 
-  text-align: right;
-  width: 100%;
+  flex: auto; 
+  margin: 0; 
 }
-
 nav h1 a { 
   text-decoration: none; 
   padding: 0.25rem 0.5rem; 
   color: #000000;
   font-weight: 900;
-  display: block;
-  text-align: right;
-  font-size: 0.9em; /* Slightly smaller font */
 }
-
-nav ul { 
+nav ul  { 
   display: flex; 
-  flex-direction: column; /* Stack list items vertically */
   list-style: none; 
   margin: 0; 
   padding: 0; 
-  width: 100%;
 }
-
-nav ul li {
-  margin-bottom: 2px; /* Small gap between items */
-}
-
-nav ul li:last-child {
-  margin-bottom: 0;
-}
-
 nav ul li a, nav ul li span, header .action { 
   display: block; 
-  padding: 0.4rem 0.6rem; /* Slightly smaller padding */
+  padding: 0.5rem; 
   background: #000000;
   color: #ffff00;
-  margin: 0;
+  margin: 0 2px;
   border: 2px solid #ffff00;
-  text-align: right;
-  font-size: 0.9em; /* Slightly smaller font */
-  width: 100%;
-  box-sizing: border-box;
 }
-
 nav ul li a:hover {
   background: #ffff00;
   color: #000000;
 }
-
 .content { 
   padding: 0 1rem 1rem; 
   background: #000000;
   color: #ffffff;
 }
-
 .content > header { 
   border-bottom: 2px solid #ff00ff; 
   display: flex; 
   align-items: flex-end; 
 }
-
 .content > header h1 { 
   flex: auto; 
   margin: 1rem 0 0.25rem 0; 
 }
-
 .flash { 
   margin: 1em 0; 
   padding: 1em; 
@@ -126,7 +101,6 @@ nav ul li a:hover {
   color: #000000;
   font-weight: bold;
 }
-
 .post > header { 
   display: flex; 
   align-items: flex-end; 
@@ -135,46 +109,38 @@ nav ul li a:hover {
   padding: 10px;
   border-left: 4px solid #ff00ff;
 }
-
 .post > header > div:first-of-type { 
   flex: auto; 
 }
-
 .post > header h1 { 
   font-size: 1.5em; 
   margin-bottom: 0; 
   text-shadow: 2px 2px 0px #00ffff;
 }
-
 .post .about { 
   color: #00ffff; 
   font-style: italic; 
   font-weight: bold;
 }
-
 .post .body { 
   white-space: pre-line; 
   background: #111111;
   padding: 15px;
   border: 1px solid #333333;
 }
-
 .content:last-child { 
   margin-bottom: 0; 
 }
-
 .content form { 
   margin: 1em 0; 
   display: flex; 
   flex-direction: column; 
 }
-
 .content label { 
   font-weight: bold; 
   margin-bottom: 0.5em; 
   color: #ff00ff;
 }
-
 .content input, .content textarea { 
   margin-bottom: 1em; 
   background: #000000;
@@ -182,18 +148,15 @@ nav ul li a:hover {
   color: #ffffff;
   padding: 8px;
 }
-
 .content textarea { 
   min-height: 12em; 
   resize: vertical; 
 }
-
 input.danger { 
   color: #ff0000; 
   background: #000000;
   border: 2px solid #ff0000;
 }
-
 input[type=submit] { 
   align-self: start; 
   min-width: 10em; 
@@ -204,7 +167,6 @@ input[type=submit] {
   text-transform: uppercase;
   cursor: pointer;
 }
-
 input[type=submit]:hover {
   background: #ffff00;
   color: #000000;
@@ -231,36 +193,34 @@ input[type=submit]:hover {
   box-shadow: 5px 5px 0px #ffff00;
 }
 
-h1 { 
-  font-family: 'Impact', 'Arial Black', sans-serif; 
-  color: #ffffff; 
-  margin: 1rem 0; 
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 0px #ff00ff;
+html {
+  font-family: 'Arial', 'Helvetica Neue', sans-serif; 
+  background: #000000; 
+  padding: 1rem; 
+  background-image: radial-gradient(#ff00ff 1px, transparent 1px), 
+                    radial-gradient(#00ffff 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+  background-attachment: fixed;
+  animation: slowScroll 20s linear infinite;
 }
 
-h2 { 
-  font-family: 'Impact', 'Arial Black', sans-serif; 
-  color: #ffffff; 
-  margin: 1rem 0; 
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 0px #00c8ff;
+@keyframes slowScroll {
+  0% {
+    background-position: 0 0, 25px 25px;
+  }
+  100% {
+    background-position: 50px 50px, 75px 75px;
+  }
 }
 
-a { 
-  color: #ffff00; 
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  color: #00b7ff;
-  text-decoration: underline;
-}
-
-hr { 
-  border: none; 
-  border-top: 2px dashed #ffff00; 
+html { 
+  font-family: 'Arial', 'Helvetica Neue', sans-serif; 
+  background: #000000; 
+  padding: 1rem; 
+  background-image: radial-gradient(#ff00ff 2px, transparent 2px), 
+                    radial-gradient(#00ffff 2px, transparent 2px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+  background-attachment: fixed;
 }
