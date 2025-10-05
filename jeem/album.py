@@ -17,24 +17,30 @@ bp = Blueprint('album', __name__)
 def index(album_id=None):
 
     db = get_db()
+    random_album_id = None
 
     # If no album_id provided, redirect to a random album
     if album_id is None:
         album_count = db.execute('SELECT COUNT(*) AS count FROM albums').fetchone()
         random_album_id = random.randint(1, album_count['count'])
         return redirect(url_for('album.index', album_id=random_album_id))
+    else:
+        random_album_id = album_id
     
     album = db.execute('SELECT * FROM albums WHERE id = ? LIMIT 1;', (album_id,)).fetchone()
 
     
     if album is None:
         abort(404, f"Album id {album_id} doesn't exist.")
+    else:
+        db.execute('INSERT INTO generations (user_id, album_id) VALUES (?,?)',
+                   (session['user_id'], album_id))
+        db.commit()
     
 
     if request.method == 'POST':
         rating = request.form['rating']
         error = None
-
 
         if error is not None:
             flash(error)
@@ -45,15 +51,10 @@ def index(album_id=None):
                 (session['user_id'], album_id, rating)
             )
             db.commit()
+            return redirect(url_for('album.index', album_id=random_album_id))
+        
+        
 
-    # album_count = db.execute(
-    #     'SELECT COUNT(*) AS "id"'
-    #     'FROM albums;'
-    # ).fetchone()
-
-    # random_album = random.randint(1,album_count['id'])
-    # print(random_album)
-    # print(album_count)
 
 
     ratings = db.execute('SELECT * '

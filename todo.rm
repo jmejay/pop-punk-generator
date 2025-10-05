@@ -3,3 +3,6 @@ Note that init.py on the pi is different (app is created)
 - create ranking system
 - rating displays 
 - export / backup of database?
+
+
+backup.sqlite file has rankings for old album id's; get the album id and fetch it's spotify album id, fix the ratings

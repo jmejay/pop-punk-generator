@@ -44,6 +44,10 @@ def create_app(test_config=None):
     app.register_blueprint(album.bp)
     app.add_url_rule('/album', endpoint='album')
 
+    from . import history
+    app.register_blueprint(history.bp)
+    app.add_url_rule('/history', endpoint='history')
+
     return app
 
 # Create the app instance

@@ -4,14 +4,15 @@
 <nav>
   <h1>Jimball's Pop Punk album generator</h1>
   <ul>
-    <li><a href="{{ url_for('blog.index') }}">Posts 💌</a>
+    <li><a href="{{ url_for('blog.index') }}">Posts</a>
       {% if g.user %}
-      <li><a href="{{ url_for('album.index') }}">Get Album 🎲</a>
-        <li><a href="{{ url_for('auth.logout') }}">Log Out: 😘</a>
-          <li><span>{{ g.user['username'] }} 🩵</span></li>
+      <li><a href="{{ url_for('history.index') }}">History</a>
+      <li><a href="{{ url_for('album.index') }}">Get Album</a>
+        <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+          <li><span>{{ g.user['username'] }}</span></li>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register 👽</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In 🍕</a>
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
   </ul>
 </nav>

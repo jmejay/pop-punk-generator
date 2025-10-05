@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+  <h1>{% block posttitle %}Generation history{% endblock %}</h1>
+
+{% endblock %}
+
+{% block content %}
+  {% if g.user %}
+    {% for gen in generations %}
+    <p class="gen">
+        <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['generated_on']}}: {{gen['album_name']}} by {{gen['band_name']}} was {{'rated ' + '🤟'* gen['rating'] if gen['rating'] else 'not yet rated!'}}
+        </a>
+    </p>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
+
