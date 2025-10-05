@@ -13,7 +13,7 @@
   {% endif %}
     {% for gen in generations %}
     <p class="gen">
-        <small>{{gen['generated_on']}}: </small> <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a> by <b> {{gen['band_name']}} </b> was {{'rated ' + '🤟'* gen['rating'] if gen['rating'] else 'not yet rated!'}}
+        <small>{{gen['generated_on']}}: </small> <u><a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a></u> by <span style="color: #00ffff;">{{gen['band_name']}} </span>was {{'rated ' + '🤟'* gen['rating'] if gen['rating'] else 'not yet rated!'}}
     </p>
     {% endfor %}
     <h2>Global history</h2>
@@ -23,7 +23,7 @@
     {% endif %}
     {% for gen in allgen %}
     <p class="all">
-        <small>{{gen['generated_on']}}: </small>{{gen['username']}} got <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a> by <b>{{gen['band_name']}}</b> {{'and rated it ' + '🤟'* gen['rating'] if gen['rating'] else 'but didn\'t rate it yet!'}}
+        <small>{{gen['generated_on']}}: </small>{{gen['username']}} got <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a> by <span style="color: #00ffff;">{{gen['band_name']}}</span> {{'and rated it ' + '🤟'* gen['rating'] if gen['rating'] else 'but didn\'t rate it yet!'}}
         
     </p>
     {% endfor %}

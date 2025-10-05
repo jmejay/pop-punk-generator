@@ -32,7 +32,7 @@ h2 {
   text-shadow: 2px 2px 0px #00c8ff;
 }
 a { 
-  color: #ffff00; 
+  color: #8080FF; 
   text-decoration: none;
   font-weight: bold;
 }
@@ -70,12 +70,12 @@ nav ul li a, nav ul li span, header .action {
   display: block; 
   padding: 0.5rem; 
   background: #000000;
-  color: #ffff00;
+  color: #8080FF;
   margin: 0 2px;
-  border: 2px solid #ffff00;
+  border: 2px solid #8080FF;
 }
 nav ul li a:hover {
-  background: #ffff00;
+  background: #ff00ff;
   color: #000000;
 }
 .content { 
