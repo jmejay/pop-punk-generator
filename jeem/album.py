@@ -55,10 +55,12 @@ def index(album_id=None):
                 '''
                 DELETE FROM ratings
                 WHERE id NOT IN (
-                    SELECT id FROM ratings WHERE album_id = (?) AND user_id = (?) ORDER BY rated_on desc LIMIT 1
+                    SELECT id FROM ratings WHERE album_id = (?) AND user_id = (?) ORDER BY rated_on desc LIMIT 1 
                 )
+                AND album_id = (?)
+                AND user_id = (?)
                 ''',
-                (random_album_id, session['user_id'])
+                (random_album_id, session['user_id'], random_album_id, session['user_id'])
             )
             db.commit()
             return redirect(url_for('album.index', album_id=random_album_id))

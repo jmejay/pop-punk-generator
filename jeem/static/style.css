@@ -41,8 +41,7 @@ a:hover {
   text-decoration: underline;
 }
 hr { 
-  border: none; 
-  border-top: 2px dashed #ffff00; 
+  color: #00ffff;
 }
 nav { 
   background: linear-gradient(45deg, #ff00ff, #00ffff);

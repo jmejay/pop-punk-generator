@@ -2,18 +2,32 @@
 
 
 {% block header %}
-  <h1>{% block posttitle %}Generation history{% endblock %}</h1>
+  <h1>{% block posttitle %}{{username}}'s history{% endblock %}</h1>
 
 {% endblock %}
 
 {% block content %}
   {% if g.user %}
+  {% if not generations %}
+  <t>Nothing here yet! Go and <a href="{{ url_for('album.index')}}"> get a random album</a>!</t>
+  {% endif %}
     {% for gen in generations %}
     <p class="gen">
-        <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['generated_on']}}: {{gen['album_name']}} by {{gen['band_name']}} was {{'rated ' + '🤟'* gen['rating'] if gen['rating'] else 'not yet rated!'}}
-        </a>
+        <small>{{gen['generated_on']}}: </small> <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a> by <b> {{gen['band_name']}} </b> was {{'rated ' + '🤟'* gen['rating'] if gen['rating'] else 'not yet rated!'}}
     </p>
     {% endfor %}
+    <h2>Global history</h2>
+    <hr>
+    {% if not allgen %}
+      <t>Nothing here yet!</t>
+    {% endif %}
+    {% for gen in allgen %}
+    <p class="all">
+        <small>{{gen['generated_on']}}: </small>{{gen['username']}} got <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a> by <b>{{gen['band_name']}}</b> {{'and rated it ' + '🤟'* gen['rating'] if gen['rating'] else 'but didn\'t rate it yet!'}}
+        
+    </p>
+    {% endfor %}
+
   {% endif %}
 {% endblock %}
 
