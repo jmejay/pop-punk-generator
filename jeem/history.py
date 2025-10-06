@@ -18,6 +18,7 @@ def index():
         'ON g.album_id = a.id ' \
         'LEFT JOIN ratings r ' \
         'ON r.album_id = a.id ' \
+        'AND r.user_id = g.user_id ' \
         'WHERE g.generated_on = (SELECT MAX(generated_on) from generations WHERE user_id = ? AND album_id = a.id) ' \
         'AND g.user_id = ? ' \
         'GROUP BY a.id, a.album_name, a.band_name, r.rating, r.rated_on '

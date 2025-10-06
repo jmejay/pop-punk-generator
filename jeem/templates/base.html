@@ -16,10 +16,10 @@
   <ul>
   <li><a href="{{ url_for('history.index') }}">History</a>
     <!-- <li><a href="{{ url_for('album.index') }}">Get Album</a> -->
-      <li><a href="{{ url_for('blog.index') }}">Posts</a>
+      <li><a href="{{ url_for('blog') }}">Posts</a>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
         
-        {% else %}
+        {% else %}<ul>
       <li><a href="{{ url_for('auth.register') }}">Register</a>
       <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
@@ -34,3 +34,6 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+hi
+hi
+hi

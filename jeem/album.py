@@ -19,6 +19,8 @@ def index(album_id=None):
     db = get_db()
     random_album_id = None
     album_type = request.args.get('album_type')
+    if album_type not in ['pop punk', 'emo']:
+        album_type = None
 
     # If no album_id provided, redirect to a random album
     if album_type is not None and album_id is None:

@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from jeem.db import get_db
 
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+bp = Blueprint('auth', __name__, url_prefix='/')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -38,7 +38,7 @@ def register():
 
     return render_template('auth/register.html')
 
-@bp.route('/login', methods=('GET', 'POST'))
+@bp.route('/', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -58,7 +58,7 @@ def login():
             session.clear()
             session['user_id'] = user['id']
             session['username'] = user['username']
-            return redirect(url_for('index'))
+            return redirect(url_for('album.index'))
 
         flash(error)
 
@@ -80,7 +80,7 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('album.index'))
 
 
 

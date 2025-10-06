@@ -2,7 +2,15 @@
 - export / backup of database? cron? 
 - deletion of logs 
 - stats Page
+- profile page for users 
+- events page 
+- spotify profile integration (add album to queue)
 
 
 
 backup.sqlite file has rankings for old album id's; get the album id and fetch it's spotify album id, fix the ratings
+
+
+stop daemon
+replace jeem/
+start daemon
