@@ -23,7 +23,7 @@
     {% endif %}
     {% for gen in allgen %}
     <p class="all">
-        <small>{{gen['generated_on']}}: </small>{{gen['username']}} got <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a> by <span style="color: #00ffff;">{{gen['band_name']}}</span> {{'and rated it ' + '🤟'* gen['rating'] if gen['rating'] else 'but didn\'t rate it yet!'}}
+        {{gen['username']}} got <a href="{{ url_for('album.index', album_id=gen['id']) }}">{{gen['album_name']}}</a> by <span style="color: #00ffff;">{{gen['band_name']}}</span> {{'and rated it ' + '🤟'* gen['rating'] if gen['rating'] else 'but didn\'t rate it yet!'}}
         
     </p>
     {% endfor %}
