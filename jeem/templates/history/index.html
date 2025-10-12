@@ -2,8 +2,8 @@
 
 
 {% block header %}
-  <h1>{% block posttitle %}{{username}}'s history{% endblock %}</h1>
-
+  <h1>{% block posttitle %}{{session.get('username')}}'s history</h1>
+{% endblock %}
 {% endblock %}
 
 {% block content %}

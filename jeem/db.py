@@ -25,6 +25,7 @@ def close_db(e=None):
         db.close()
 
 
+# python3 -m flask --app jeem run --debug
 def init_db(): # this is run via flask --app jeem init-db in terminal / flask --app jeem init-db   
     db = get_db()
 

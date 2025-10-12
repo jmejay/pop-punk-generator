@@ -18,14 +18,29 @@ def index(album_id=None):
 
     db = get_db()
     random_album_id = None
+    album_age = request.args.get('album_age')
+    if album_age not in ['10', '20']:
+        album_age = None
+    elif album_age == '10':
+        album_age = "< '2011-01-01'"
+    elif album_age == '20':
+        album_age = "> '2020-01-01'"
     album_type = request.args.get('album_type')
     if album_type not in ['pop punk', 'emo']:
         album_type = None
 
     # If no album_id provided, redirect to a random album
-    if album_type is not None and album_id is None:
+    if album_type is not None and album_id is None and not album_age:
         # generate a pp only ID and set albumtype null, redirect with ID
         album_id = db.execute(f'SELECT id FROM albums WHERE band_genre = \'{album_type}\' '\
+                                ' ORDER BY RANDOM() LIMIT 1;'
+                                 ).fetchone()
+        random_album_id = album_id['id']
+        return redirect(url_for('album.index', album_id=random_album_id, album_type='x'))
+    
+    elif album_age and album_type and album_id is None:
+        album_id = db.execute(f'SELECT id FROM albums WHERE band_genre = \'{album_type}\' '\
+                              f' AND release_date {album_age} ' \
                                 ' ORDER BY RANDOM() LIMIT 1;'
                                  ).fetchone()
         random_album_id = album_id['id']

@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, session
 
 
 def create_app(test_config=None):
@@ -28,6 +28,8 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
+    
+
 
 
     from . import db
@@ -49,11 +51,21 @@ def create_app(test_config=None):
     app.register_blueprint(history.bp)
     app.add_url_rule('/history', endpoint='history')
 
+    from . import stats
+    app.register_blueprint(stats.bp)
+    app.add_url_rule('/stats', endpoint='history')
+
     return app
 
 # Create the app instance
 app = create_app()
+# @app.context_processor
+# def inject_session():
+#     return dict(session=session)
 
 # This ensures that when imported, it returns 'jeem:app'
 if __name__ == '__main__':
     app.run()
+    # @app.context_processor
+    # def inject_session():
+    #     return dict(session=session)

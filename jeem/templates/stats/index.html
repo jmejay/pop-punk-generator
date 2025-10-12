@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+  <h1>{% block posttitle %}{{session.get('username')}}'s stats</h1>{% endblock %}
+
+{% endblock %}
+
+{% block content %}
+{% if g.user %}
+
+<h2>You have completed:</h2>
+<h3>
+  {% for com in completed %}
+    {{com['rated']}} out of 
+    {{com['total']}} pop punk albums
+    ({{com['percent']}}%)
+  {% endfor %}
+</br>
+</h3>
+
+<hr>
+
+<h2>Top rated bands</h2>
+<hr>
+
+<table>
+<tr>
+  <th>Band</th>
+  <th>Average</th>
+  <th>Ratings</th>
+</tr>
+  {% for fave in favourites %}
+
+  <tr>
+    <td><i>{{fave['band_name']}}</i></td>
+    <td>{{fave['average']}}</td>
+    <td>{{fave['ratings']}}</td>
+  </tr>
+
+   
+    {% if not loop.last %}
+      
+    {% endif %}
+  {% endfor %}
+  </table>
+    {% endif %}
+
+{% endblock %}
