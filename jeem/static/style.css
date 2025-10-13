@@ -311,3 +311,21 @@ html {
 .nav-item:hover .dropdown-menu {
   display: block;
 }
+
+.container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+}
+
+.left-section {
+  flex: 1; /* Takes up equal space */
+  /* background-color: #f0f0f0; */
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.right-section {
+  flex: 1; /* Takes up equal space */
+  /* background-color: #f9f9f9; */
+  padding: 20px;
+}

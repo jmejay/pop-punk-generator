@@ -34,6 +34,26 @@ def index():
         (session['user_id'],)
     ).fetchall()
 
+    hated = db.execute(
+        '''select 
+            a.band_name,
+            ROUND(AVG(r.rating),2) AS "average",
+            COUNT(*) AS "ratings",
+            AVG(r.rating) / 5  AS sort
+        from ratings r 
+        left join user u 
+        on r.user_id = u.id 
+        left join albums a 
+        on r.album_id  = a.id
+        where 1=1
+        and u.id = ? 
+        group by a.band_name
+        --having count(*) > 1 
+        order by 4 
+        limit 15;''',
+        (session['user_id'],)
+    ).fetchall()
+
     completed = db.execute(
     '''
     select 
@@ -54,5 +74,5 @@ def index():
     (session['user_id'],)
     ).fetchall()
     
-    return render_template('stats/index.html', favourites=favourites, completed=completed)
+    return render_template('stats/index.html', favourites=favourites, completed=completed, hated=hated)
 

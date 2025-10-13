@@ -9,22 +9,28 @@
 {% block content %}
 {% if g.user %}
 
-<h2>You have completed:</h2>
+<!-- <h2>You have completed:</h2> -->
 <h3>
   {% for com in completed %}
-    {{com['rated']}} out of 
-    {{com['total']}} pop punk albums
-    ({{com['percent']}}%)
+    <span style="color: #ff00ff;">{{com['rated']}}</span> out of 
+    <span style="color: #ff00ff;">{{com['total']}}</span> <span style="color: #00ffff;">{{com['band_genre']}}</span> albums rated
+    (<span style="color: #ff00ff;">{{com['percent']}}%</span>)
+    <br>
   {% endfor %}
 </br>
 </h3>
 
 <hr>
-
-<h2>Top rated bands</h2>
+<center>
+<h2>Top & Bottom</h2></center>
 <hr>
 
-<table>
+{% endif %}
+
+<div class="container">
+  <div class="left-section">
+    <!-- <h2>Favourites</h2> -->
+   <table>
 <tr>
   <th>Band</th>
   <th>Average</th>
@@ -44,6 +50,30 @@
     {% endif %}
   {% endfor %}
   </table>
+  </div>
+  
+  <div class="right-section">
+    <!-- <h2>Bottom</h2> -->
+    <table>
+<tr>
+  <th>Band</th>
+  <th>Average</th>
+  <th>Ratings</th>
+</tr>
+  {% for hate in hated %}
+
+  <tr>
+    <td><i>{{hate['band_name']}}</i></td>
+    <td>{{hate['average']}}</td>
+    <td>{{hate['ratings']}}</td>
+  </tr>
+
+   
+    {% if not loop.last %}
+      
     {% endif %}
+  {% endfor %}
+  </table>
+  </div>
 
 {% endblock %}
