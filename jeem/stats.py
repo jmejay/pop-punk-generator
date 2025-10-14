@@ -78,6 +78,7 @@ def index():
     '''
     select 
     count(*) AS "Total Ratings",
+    ROUND(avg(r.rating),1) AS "Average Rating",
     u.username 
     from ratings r 
     left join "user" u 

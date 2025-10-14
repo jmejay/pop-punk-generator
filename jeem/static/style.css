@@ -314,7 +314,7 @@ html {
 
 .container {
   display: flex;
-  height: 60vh; /* Full viewport height */
+  height: 50vh; /* Full viewport height */
 }
 /*
 .left-section {

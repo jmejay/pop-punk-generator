@@ -80,10 +80,10 @@
     </div>
     <h1>Global stats</h1>
     <hr style="border: none; height: 2px; background-color: #ff00ff;"></br>
-    <h2>Total Ratings</h2>
+    <h2>Total & Average Ratings</h2>
     {% for ur in user_ratings %}
     <h3>
-    {{ur['username']}}: {{ur['Total Ratings']}}</br>
+    <span style="color: #00ffff;">{{ur['username']}}</span>: {{ur['Total Ratings']}} (<span style="color: #f0f;">{{ur['Average rating']}}</span>)</br>
     </h3>
     {%endfor%}
   {% endif %}
