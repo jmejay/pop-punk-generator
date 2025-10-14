@@ -314,18 +314,56 @@ html {
 
 .container {
   display: flex;
-  height: 100vh; /* Full viewport height */
+  height: 60vh; /* Full viewport height */
 }
-
+/*
 .left-section {
   flex: 1; /* Takes up equal space */
   /* background-color: #f0f0f0; */
-  padding: 20px;
-  border-right: 1px solid #ccc;
+  /* padding: 20px; */
+  /* border-right: 1px solid #00ffff; 
+  border-right: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .right-section {
   flex: 1; /* Takes up equal space */
   /* background-color: #f9f9f9; */
-  padding: 20px;
+  /* padding: 20px; 
+  justify-content: center;
+  align-items: center;
+}
+*/
+
+.left-section, .right-section {
+  flex: 1;
+   padding: 0px; 
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;  /*Vertical center */
+  /*align-items: center; /* Horizontal center */
+}
+
+
+th {
+  text-align: left;
+  padding: 4px;
+  border-bottom: 1px solid #00ffff;
+}
+
+td {
+  text-align: left;
+  padding: 2px;
+  border-bottom: 1px solid #222;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #0ff;
+}
+
+tr:last-child td {
+  border-bottom: none;
 }

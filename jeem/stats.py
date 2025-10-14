@@ -73,6 +73,19 @@ def index():
     ''',
     (session['user_id'],)
     ).fetchall()
+
+    user_ratings = db.execute(
+    '''
+    select 
+    count(*) AS "Total Ratings",
+    u.username 
+    from ratings r 
+    left join "user" u 
+    on r.user_id  = u.id
+    group by u.username
+    order by 1 desc 
+    ''',
+    ).fetchall()
     
-    return render_template('stats/index.html', favourites=favourites, completed=completed, hated=hated)
+    return render_template('stats/index.html', favourites=favourites, completed=completed, hated=hated, user_ratings=user_ratings)
 

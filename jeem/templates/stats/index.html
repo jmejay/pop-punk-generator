@@ -7,73 +7,84 @@
 {% endblock %}
 
 {% block content %}
-{% if g.user %}
+  {% if g.user %}
 
-<!-- <h2>You have completed:</h2> -->
-<h3>
-  {% for com in completed %}
-    <span style="color: #ff00ff;">{{com['rated']}}</span> out of 
-    <span style="color: #ff00ff;">{{com['total']}}</span> <span style="color: #00ffff;">{{com['band_genre']}}</span> albums rated
-    (<span style="color: #ff00ff;">{{com['percent']}}%</span>)
-    <br>
-  {% endfor %}
-</br>
-</h3>
+  <!-- <h2>You have completed:</h2> -->
+  <h3>
+  </br>
+    {% for com in completed %}
+      <span style="color: #ff00ff;">{{com['rated']}}</span> out of 
+      <span style="color: #ff00ff;">{{com['total']}}</span> <span style="color: #00ffff;">{{com['band_genre']}}</span> albums rated
+      (<span style="color: #ff00ff;">{{com['percent']}}%</span>)
+      <br>
+    {% endfor %}
+  </br>
+  </h3>
 
-<hr>
-<center>
-<h2>Top & Bottom</h2></center>
-<hr>
-
-{% endif %}
-
-<div class="container">
-  <div class="left-section">
-    <!-- <h2>Favourites</h2> -->
-   <table>
-<tr>
-  <th>Band</th>
-  <th>Average</th>
-  <th>Ratings</th>
-</tr>
-  {% for fave in favourites %}
-
-  <tr>
-    <td><i>{{fave['band_name']}}</i></td>
-    <td>{{fave['average']}}</td>
-    <td>{{fave['ratings']}}</td>
-  </tr>
-
-   
-    {% if not loop.last %}
-      
-    {% endif %}
-  {% endfor %}
-  </table>
-  </div>
   
-  <div class="right-section">
-    <!-- <h2>Bottom</h2> -->
-    <table>
-<tr>
-  <th>Band</th>
-  <th>Average</th>
-  <th>Ratings</th>
-</tr>
-  {% for hate in hated %}
+  <h2>Top & Bottom</h2>
+  <!-- <hr> -->
 
+
+
+  <div class="container">
+    <div class="left-section">
+      <!-- <h2>Favourites</h2> -->
+  <table>
+    <thead>
   <tr>
-    <td><i>{{hate['band_name']}}</i></td>
-    <td>{{hate['average']}}</td>
-    <td>{{hate['ratings']}}</td>
+    <th>Band</th>
+    <th>Average</th>
+    <th>Ratings</th>
   </tr>
+  </thead>
+    {% for fave in favourites %}
 
-   
-    {% if not loop.last %}
-      
-    {% endif %}
-  {% endfor %}
-  </table>
-  </div>
+    <tr>
+      <td><i>{{fave['band_name']}}</i></td>
+      <td>{{fave['average']}}</td>
+      <td>{{fave['ratings']}}</td>
+    </tr>
 
+    
+      {% if not loop.last %}
+        
+      {% endif %}
+    {% endfor %}
+    </table>
+    </div>
+    
+    <div class="right-section">
+      <!-- <h2>Bottom</h2> -->
+      <table>
+  <tr>
+    <th>Band</th>
+    <th>Average</th>
+    <th>Ratings</th>
+  </tr>
+    {% for hate in hated %}
+
+    <tr>
+      <td><i>{{hate['band_name']}}</i></td>
+      <td>{{hate['average']}}</td>
+      <td>{{hate['ratings']}}</td>
+    </tr>
+
+    
+      {% if not loop.last %}
+        
+      {% endif %}
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+    <h1>Global stats</h1>
+    <hr style="border: none; height: 2px; background-color: #ff00ff;"></br>
+    <h2>Total Ratings</h2>
+    {% for ur in user_ratings %}
+    <h3>
+    {{ur['username']}}: {{ur['Total Ratings']}}</br>
+    </h3>
+    {%endfor%}
+  {% endif %}
 {% endblock %}

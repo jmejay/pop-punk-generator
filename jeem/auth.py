@@ -58,7 +58,9 @@ def login():
             session.clear()
             session['user_id'] = user['id']
             session['username'] = user['username']
-            return redirect(url_for('album.index'))
+            session.permanent = True
+
+            return redirect(url_for('stats.index'))
 
         flash(error)
 
