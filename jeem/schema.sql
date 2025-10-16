@@ -3,6 +3,7 @@
 --DROP TABLE IF EXISTS albums;
 --DROP TABLE IF EXISTS ratings;
 DROP TABLE IF EXISTS albums;
+DROP TABLE IF EXISTS album_genres;
 
 CREATE TABLE IF NOT EXISTS user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +32,13 @@ CREATE TABLE IF NOT EXISTS albums (
   band_id TEXT,
   band_popularity INTEGER,
   band_spotify_url TEXT,
-  band_genre TEXT
+  band_genre TEXT,
+  genres TEXT
+);
+
+CREATE TABLE IF NOT EXISTS album_genres (
+  album_id TEXT,
+  genre TEXT
 );
 
 CREATE TABLE IF NOT EXISTS generations (

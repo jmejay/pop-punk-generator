@@ -60,14 +60,16 @@ def index():
         count(*) AS "total",
         count(r.id) AS "rated",
         round((count(r.album_id) * 1.0 / count(*)) * 100, 1) as  "percent",
-        a.band_genre 
+        ag.genre
     from albums a
     left join ratings r 
     on a.album_id = r.spotify_id 
     and r.user_id = ?
+    left join album_genres ag
+    on a.album_id = ag.album_id
     where 1=1
-    and a.band_genre <> ''
-    group by a.band_genre 
+    and lower(ag.genre) not in ("pop", "female vocalists", "rock", "indie", "indie rock", "acoustic")
+    group by ag.genre 
     having count(r.album_id) > 5
     order by 2 desc 
     ''',

@@ -5,6 +5,7 @@ import click
 from flask import current_app, g
 
 import csv
+import ast
 
 
 def get_db():
@@ -24,7 +25,7 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-
+# https://flask.palletsprojects.com/en/stable/installation/
 # python3 -m flask --app jeem run --debug
 def init_db(): # this is run via flask --app jeem init-db in terminal / flask --app jeem init-db   
     db = get_db()
@@ -34,7 +35,7 @@ def init_db(): # this is run via flask --app jeem init-db in terminal / flask --
 
 
 
-    with open('jeem/data.csv') as data:
+    with open('jeem/new_data.csv') as data:
         datareader = csv.DictReader(data)
         for row in datareader:
             db.execute('INSERT INTO albums (album_name, album_id, release_date,total_tracks, spotify_album_link, spotify_album_image_url, band_name, band_id, band_popularity, band_spotify_url, band_genre) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
@@ -49,8 +50,12 @@ def init_db(): # this is run via flask --app jeem init-db in terminal / flask --
                         row['band_spotify_popularity'],
                         row['band_spotify_link'],
                         row['band_genre'])
-            )
-        db.commit()
+                        )
+            for genre in ast.literal_eval(row['genres']):
+                db.execute('INSERT INTO album_genres (album_id, genre) VALUES (?,?)',
+                           (row['id'], genre)
+                           )
+            db.commit()
                            
 
 

@@ -32,7 +32,10 @@ def index(album_id=None):
     # If no album_id provided, redirect to a random album
     if album_type is not None and album_id is None and not album_age:
         # generate a pp only ID and set albumtype null, redirect with ID
-        album_id = db.execute(f'SELECT album_id FROM albums WHERE band_genre = \'{album_type}\' '\
+        album_id = db.execute(f'SELECT a.album_id FROM albums a '\
+                              ' LEFT JOIN album_genres ag ' \
+                              ' ON a.album_id = ag.album_id '
+                              ' AND ag.genre = \'{album_type}\' '\
                                 ' ORDER BY RANDOM() LIMIT 1;'
                                  ).fetchone()
         random_album_id = album_id['album_id']
@@ -47,14 +50,16 @@ def index(album_id=None):
         return redirect(url_for('album.index', album_id=random_album_id, album_type='x'))
 
     elif album_id is None:
-        album_count = db.execute('SELECT COUNT(*) AS count FROM albums').fetchone()
-        random_album_id = random.randint(1, album_count['count'])
-        return redirect(url_for('album.index', album_id=random_album_id, album_type=None))
+        album_count = db.execute(' SELECT album_id FROM albums ORDER BY RANDOM() LIMIT 1; ').fetchone()
+        # random_album_id = random.randint(1, album_count['count'])
+        random_album_id = album_count['album_id']
+        return redirect(url_for('album.index', album_id=random_album_id, album_type='x'))
 
     else:
         random_album_id = album_id
     
-    album = db.execute('SELECT * FROM albums WHERE album_id = ? LIMIT 1;', (random_album_id,)).fetchone()
+    album = db.execute('SELECT * FROM albums a '
+                       ' WHERE album_id = ? LIMIT 1;', (random_album_id,)).fetchone()
 
     
     if album is None:
