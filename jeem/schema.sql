@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS generations (
   user_id INTEGER,
   album_id INTEGER,
   generated_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  spotify_id TEXT,
   FOREIGN KEY (user_id) REFERENCES user (id),
   FOREIGN KEY (album_id) REFERENCES album (id)
 );
@@ -50,6 +51,7 @@ CREATE TABLE IF NOT EXISTS ratings (
   generation_id INTEGER,
   rated_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   rating INTEGER,
+  spotify_id TEXT,
   FOREIGN KEY (user_id) REFERENCES user (id),
   FOREIGN KEY (album_id) REFERENCES album (id),
   FOREIGN KEY (generation_id) REFERENCES generations (id)

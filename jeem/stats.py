@@ -24,7 +24,7 @@ def index():
         left join user u 
         on r.user_id = u.id 
         left join albums a 
-        on r.album_id  = a.id
+        on r.spotify_id  = a.album_id
         where 1=1
         and u.id = ? 
         group by a.band_name
@@ -44,7 +44,7 @@ def index():
         left join user u 
         on r.user_id = u.id 
         left join albums a 
-        on r.album_id  = a.id
+        on r.spotify_id  = a.album_id
         where 1=1
         and u.id = ? 
         group by a.band_name
@@ -59,16 +59,16 @@ def index():
     select 
         count(*) AS "total",
         count(r.id) AS "rated",
-        round((count(r.id) * 1.0 / count(*)) * 100, 1) as  "percent",
+        round((count(r.album_id) * 1.0 / count(*)) * 100, 1) as  "percent",
         a.band_genre 
     from albums a
     left join ratings r 
-    on a.id = r.album_id 
+    on a.album_id = r.spotify_id 
     and r.user_id = ?
     where 1=1
     and a.band_genre <> ''
     group by a.band_genre 
-    having count(r.id) > 10
+    having count(r.album_id) > 5
     order by 2 desc 
     ''',
     (session['user_id'],)

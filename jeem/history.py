@@ -11,33 +11,33 @@ bp = Blueprint('history', __name__)
 def index():
     db = get_db()
     generations = db.execute(
-        'SELECT MAX(g.generated_on) as generated_on, a.id, a.album_name, a.band_name, r.rating, r.rated_on ' \
+        'SELECT MAX(g.generated_on) as generated_on, a.album_id, a.album_name, a.band_name, r.rating, r.rated_on ' \
         'FROM generations g ' \
         'LEFT JOIN albums a ' \
-        'ON g.album_id = a.id ' \
+        'ON g.spotify_id = a.album_id ' \
         'LEFT JOIN ratings r ' \
-        'ON r.album_id = a.id ' \
+        'ON r.spotify_id = a.album_id ' \
         'AND r.user_id = g.user_id ' \
-        'WHERE g.generated_on = (SELECT MAX(generated_on) from generations WHERE user_id = ? AND album_id = a.id) ' \
+        'WHERE g.generated_on = (SELECT MAX(generated_on) from generations WHERE user_id = ? AND spotify_id = a.album_id) ' \
         'AND g.user_id = ? ' \
-        'GROUP BY a.id, a.album_name, a.band_name, r.rating, r.rated_on '
+        'GROUP BY a.album_id, a.album_name, a.band_name, r.rating, r.rated_on '
         'ORDER BY g.generated_on desc ' \
         'LIMIT 15 ',
         (session['user_id'],session['user_id'],)
     ).fetchall()
     allgen = db.execute(
-        'SELECT MAX(g.generated_on) as generated_on, a.id, a.album_name, a.band_name, r.rating, r.rated_on, u.username ' \
+        'SELECT MAX(g.generated_on) as generated_on, a.album_id, a.album_name, a.band_name, r.rating, r.rated_on, u.username ' \
         'FROM generations g ' \
         'LEFT JOIN albums a ' \
-        'ON g.album_id = a.id ' \
+        'ON g.spotify_id = a.album_id ' \
         'LEFT JOIN ratings r ' \
-        'ON r.album_id = a.id ' \
+        'ON r.spotify_id = a.album_id ' \
         'AND r.user_id = g.user_id ' \
         'LEFT JOIN user u ' \
         'ON g.user_id = u.id ' \
-        'WHERE g.generated_on = (SELECT MAX(generated_on) from generations WHERE user_id <> ? AND album_id = a.id) ' \
+        'WHERE g.generated_on = (SELECT MAX(generated_on) from generations WHERE user_id <> ? AND spotify_id = a.album_id) ' \
         'AND g.user_id <> ? ' \
-        'GROUP BY a.id, a.album_name, a.band_name, r.rating, r.rated_on '
+        'GROUP BY a.album_id, a.album_name, a.band_name, r.rating, r.rated_on '
         'ORDER BY g.generated_on desc ' \
         'LIMIT 15 ',
         (session['user_id'],session['user_id'],)

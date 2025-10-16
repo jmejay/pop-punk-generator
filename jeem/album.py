@@ -11,7 +11,7 @@ import random
 bp = Blueprint('album', __name__)
 
 @bp.route('/album')
-@bp.route('/album/<int:album_id>', methods=('GET', 'POST'))
+@bp.route('/album/<album_id>', methods=('GET', 'POST'))
 
 @login_required
 def index(album_id=None):
@@ -32,18 +32,18 @@ def index(album_id=None):
     # If no album_id provided, redirect to a random album
     if album_type is not None and album_id is None and not album_age:
         # generate a pp only ID and set albumtype null, redirect with ID
-        album_id = db.execute(f'SELECT id FROM albums WHERE band_genre = \'{album_type}\' '\
+        album_id = db.execute(f'SELECT album_id FROM albums WHERE band_genre = \'{album_type}\' '\
                                 ' ORDER BY RANDOM() LIMIT 1;'
                                  ).fetchone()
-        random_album_id = album_id['id']
+        random_album_id = album_id['album_id']
         return redirect(url_for('album.index', album_id=random_album_id, album_type='x'))
     
     elif album_age and album_type and album_id is None:
-        album_id = db.execute(f'SELECT id FROM albums WHERE band_genre = \'{album_type}\' '\
+        album_id = db.execute(f'SELECT album_id FROM albums WHERE band_genre = \'{album_type}\' '\
                               f' AND release_date {album_age} ' \
                                 ' ORDER BY RANDOM() LIMIT 1;'
                                  ).fetchone()
-        random_album_id = album_id['id']
+        random_album_id = album_id['album_id']
         return redirect(url_for('album.index', album_id=random_album_id, album_type='x'))
 
     elif album_id is None:
@@ -54,13 +54,13 @@ def index(album_id=None):
     else:
         random_album_id = album_id
     
-    album = db.execute('SELECT * FROM albums WHERE id = ? LIMIT 1;', (random_album_id,)).fetchone()
+    album = db.execute('SELECT * FROM albums WHERE album_id = ? LIMIT 1;', (random_album_id,)).fetchone()
 
     
     if album is None:
         abort(404, f"Album id {album_id} doesn't exist.")
     else:
-        db.execute('INSERT INTO generations (user_id, album_id) VALUES (?,?)',
+        db.execute('INSERT INTO generations (user_id, spotify_id) VALUES (?,?)',
                    (session['user_id'], album_id))
         db.commit()
     
@@ -73,7 +73,7 @@ def index(album_id=None):
             flash(error)
         else: 
             db.execute(
-                'INSERT INTO ratings (user_id, album_id, rating)'
+                'INSERT INTO ratings (user_id, spotify_id, rating)'
                 'VALUES (?, ?, ?)',
                 (session['user_id'], album_id, rating)
             )
@@ -82,9 +82,9 @@ def index(album_id=None):
                 '''
                 DELETE FROM ratings
                 WHERE id NOT IN (
-                    SELECT id FROM ratings WHERE album_id = (?) AND user_id = (?) ORDER BY rated_on desc LIMIT 1 
+                    SELECT id FROM ratings WHERE spotify_id = (?) AND user_id = (?) ORDER BY rated_on desc LIMIT 1 
                 )
-                AND album_id = (?)
+                AND spotify_id = (?)
                 AND user_id = (?)
                 ''',
                 (random_album_id, session['user_id'], random_album_id, session['user_id'])
@@ -99,12 +99,12 @@ def index(album_id=None):
     ratings = db.execute('SELECT * '
         ' FROM ratings r '
         ' LEFT JOIN user u ON r.user_id = u.id '
-        ' WHERE album_id = ? ORDER BY rated_on desc limit 10;', (album_id,)
+        ' WHERE spotify_id = ? ORDER BY rated_on desc limit 10;', (album_id,)
     ).fetchall()
 
     rating_data = db.execute('SELECT COUNT(*) AS cnt, ROUND(AVG(rating),2) AS avg ' 
         ' FROM ratings r ' 
-        ' WHERE album_id = ?;', (album_id,)
+        ' WHERE spotify_id = ?;', (album_id,)
     ).fetchone()
 
     return render_template('album/index.html', album=album, ratings=ratings, rating_data=rating_data)
