@@ -14,8 +14,8 @@
   </br>
     {% for com in completed %}
       <span style="color: #ff00ff;">{{com['rated']}}</span> out of 
-      <span style="color: #ff00ff;">{{com['total']}}</span> <span style="color: #00ffff;">{{com['genre']}}</span> albums rated
-      (<span style="color: #ff00ff;">{{com['percent']}}%</span>)
+      <span style="color: #ff00ff;">{{com['total']}}</span> <span style="color: #00ffff;">{{com['genre']}}</span> albums on average
+      <span style="color: #ff00ff;">{{com['avg_rating']}}</span>
       <br>
     {% endfor %}
   </br>
